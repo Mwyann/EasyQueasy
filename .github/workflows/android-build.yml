@@ -19,18 +19,18 @@ jobs:
     steps:
       # Checkout the repository
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.2.0
 
-      # Set up JDK 11 (or use the version compatible with your project)
-      - name: Set up JDK 11
-        uses: actions/setup-java@v3
+      # Set up JDK 17 (or use the version compatible with your project)
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4.4.0
         with:
           distribution: 'temurin'  # Use Temurin distribution (formerly AdoptOpenJDK)
-          java-version: '11'
+          java-version: '17'
 
       # Cache Gradle dependencies
       - name: Cache Gradle packages
-        uses: actions/cache@v3
+        uses: actions/cache@v4.0.2
         with:
           path: |
             ~/.gradle/caches
@@ -41,7 +41,7 @@ jobs:
 
       # Download and setup Android SDK
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v2
+        uses: android-actions/setup-android@v3.2.1
         with:
           api-level: 33            # API level of the Android SDK
           build-tools: 33.0.0       # Version of the build tools
