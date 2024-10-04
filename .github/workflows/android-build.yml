@@ -43,11 +43,7 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3.2.1
         with:
-          api-level: 33            # API level of the Android SDK
-          build-tools: 33.0.0       # Version of the build tools
-          target: default           # Emulator target (optional if not running emulator)
-          components: platform-tools # Platform tools needed for the build
-
+          cmdline-tools-version: 11076708
       # Grant execution permissions to Gradle wrapper
       - name: Make Gradle wrapper executable
         run: chmod +x gradlew
@@ -59,3 +55,15 @@ jobs:
       # Optionally, run tests
       - name: Run unit tests
         run: ./gradlew test
+
+      # Remote debug
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3.18
+
+      # Upload APK as artifact
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+
